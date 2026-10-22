@@ -1,0 +1,70 @@
+/* ===== شكل الوصل (بيظهر في المعاينة وفي الطباعة) ===== */
+/* مقاسات الوصل بالـ mm: لتعديل الحجم غيّر height هنا */
+:root {
+  --receipt-data-size: 9.5pt;
+}
+.sheet{color:#5b2a86}
+.receipt{height:87mm;padding:0 1mm;font-size:8.5pt;font-weight:bold;page-break-inside:avoid;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;background:#fff}
+.r-top{display:flex;align-items:flex-end;gap:3mm;margin-bottom:1.5mm}
+.grp{flex:0 0 52mm}
+.slogan{margin:0 0 .5mm;font-size:7pt}
+.lbox{border:1.5px solid #5b2a86}
+.lr{display:flex;height:6.5mm}
+.lr+.lr{border-top:1.5px solid #5b2a86}
+.lc{flex:0 0 17mm;border-left:1.5px solid #5b2a86;font-size:7.5pt;display:flex;align-items:center;justify-content:center}
+.vc{flex:1;display:flex;align-items:center;justify-content:center;color:#111;font-size:9.5pt;white-space:nowrap;overflow:hidden;min-width:0}
+.mini{flex:0 0 11mm;height:13mm;border:1.5px solid #5b2a86;display:flex;flex-direction:column}
+.mini div{flex:1;display:flex;align-items:center;justify-content:center;color:#111;font-size:10pt}
+.mini .sm{font-size:7.5pt}
+.mini div+div{border-top:1.5px solid #5b2a86}
+.title{flex:1;text-align:center}
+.title h2{margin:0;font-size:18pt;line-height:1.1}.title p{margin:0;font-size:9.5pt}
+.frame{flex:1;border:1.8px solid #5b2a86;border-radius:3.5mm;padding:1.5mm 3.5mm;display:flex;flex-direction:column;justify-content:space-between;min-height:0}
+.two{display:flex;gap:5mm}
+.two>div{flex:1}.two>div:first-child{flex:1.2}
+.f{display:flex;align-items:flex-end;gap:1mm;margin-bottom:1mm}
+.line{flex:1;border-bottom:1px dotted #5b2a86;min-height:3.6mm;color:#111;padding:0 1mm;font-weight:normal;font-size:var(--receipt-data-size, 9.5pt);line-height:1.2;white-space:nowrap;overflow:hidden}
+.txt{display:flex;align-items:flex-end;gap:1.5mm;font-size:8pt;line-height:1.25}
+.txt .grow{flex:1}
+.amt{display:inline-block;min-width:25mm;height:6.5mm;border:1.5px solid #5b2a86;text-align:center;line-height:6.5mm;color:#111;font-size:10.5pt}
+.dt{color:#111}
+.sign{gap:2mm;font-size:8pt}
+.sign .grow{min-width:18mm}
+.sign-agent-line{flex:0 1 28mm !important;min-width:20mm;max-width:35mm;text-align:center}
+.sign-ack-line{flex:1 !important;min-width:40mm}
+.sign-ack-line.ack-long{font-size:calc(var(--receipt-data-size, 9.5pt) * 0.85) !important}
+.sign-ack-line.ack-xlong{font-size:calc(var(--receipt-data-size, 9.5pt) * 0.72) !important}
+.sign-ack-line.ack-xxlong{font-size:calc(var(--receipt-data-size, 9.5pt) * 0.62) !important;letter-spacing:-0.2px}
+.r-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1mm;font-size:9pt;flex-shrink:0}
+
+/* ===== خط القص الفاصل بين الوصولات ===== */
+.cut-line{position:relative;display:flex;align-items:center;justify-content:center;height:5mm;margin:1.5mm 0;color:#777}
+.cut-line::before{content:'';position:absolute;left:0;right:0;top:50%;border-top:1.5px dashed #888}
+.cut-line span{position:relative;background:#fff;padding:0 3mm;font-size:10pt;line-height:1;user-select:none}
+
+/* ===== المعاينة (شاشة فقط) ===== */
+#print-area{display:none}
+#preview{position:fixed;inset:0;z-index:10;background:#555;overflow:auto}
+#preview[hidden]{display:none}
+.pv-bar{position:sticky;top:0;z-index:1;display:flex;gap:12px;align-items:center;padding:10px 18px;background:#1e293b;color:#f8fafc;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.pv-bar button{cursor:pointer;padding:6px 16px;border-radius:6px;font-family:inherit;font-weight:600;font-size:0.9rem;border:none;background:#5b2a86;color:#fff;transition:background .15s}
+.pv-bar button:hover{background:#4a1f70}
+.pv-bar .gray{background:#475569;border-color:#475569}
+.pv-bar .gray:hover{background:#334155}
+.pv-control{display:inline-flex;align-items:center;gap:8px;font-size:0.88rem;font-weight:600;margin:0 4px}
+.pv-control select{background:#0f172a;color:#f8fafc;border:1.5px solid #475569;border-radius:6px;padding:5px 12px;font-family:inherit;font-size:0.88rem;font-weight:600;cursor:pointer;outline:none}
+.pv-control select:focus{border-color:#7c3aed}
+.pv-info{margin-right:auto;font-size:0.88rem;color:#94a3b8}
+.pv-pages{padding:16px 0}
+#preview .sheet{width:210mm;padding:5mm 6mm;margin:0 auto 14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+
+/* ===== الطباعة ===== */
+@page{size:A4;margin:5mm 6mm}
+@media print{
+  body{background:#fff}
+  #app,#preview{display:none !important}
+  #print-area{display:block}
+  .sheet{page-break-after:always}
+  .sheet:last-child{page-break-after:auto}
+}

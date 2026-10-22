@@ -1,0 +1,28 @@
+{
+  "name": "qest-desktop",
+  "version": "1.0.0",
+  "description": "نظام الأقساط",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^43.7.7",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.qest.app",
+    "productName": "Qest",
+    "files": ["electron/**", "app/**"],
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }] },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
